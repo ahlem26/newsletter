@@ -5,6 +5,7 @@ import { useState } from "react";
 function App() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const [sucess, setSucess] = useState("");
 
   const isValidEmail = (email) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -12,17 +13,20 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError("");
+    setSucess("");
     if (!isValidEmail(email)) {
       setError("valid email required");
     } else {
       setError("");
-      console.log("Subscribed",email);
+      setSucess("good");
+      console.log("Subscribed", email);
     }
   }
 
   return (
     <>
-       {/* Conteneur principal en pleine hauteur de l'écran avec fond bleu */}
+      {/* Conteneur principal en pleine hauteur de l'écran avec fond bleu */}
       <div className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: "#36384E" }}>
 
         {/* Boîte centrale blanche contenant le contenu et l’image, avec padding, bord arrondi et ombre */}
@@ -60,15 +64,31 @@ function App() {
             {/* Formulaire d'inscription */}
             <div className="mt-4 space-y-2">
               {/* Champ email */}
-              <input
-                type="email"
-                placeholder="email@company.com"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none"
-              />
-              {/* Bouton d’envoi */}
-              <button className="w-full bg-gray-800 text-white font-semibold py-2 rounded-md hover:bg-white hover:text-gray-800 hover:border-2 hover:border-gray-800 transition">
-                Subscribe to monthly newsletter
-              </button>
+              <form onSubmit={handleSubmit} className="space-y-2 mt-4">
+                <label className="block text-sm font-medium text-gray-800">
+                  Email address
+                </label>
+                <input
+                  type="text"
+                  placeholder="email@company.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 
+                ${error 
+                  ? "border-red-500 bg-red-100 text-red-700 placeholder-red-400 focus:ring-red-400" 
+                  : "border-gray-300"
+                }`}
+                />
+                {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+                {sucess && <p className="text-green-500 text-sm mt-1">{sucess}</p>}
+
+                <button
+                  type="submit"
+                  className="w-full bg-gray-800 text-white font-semibold py-2 rounded-md hover:bg-white hover:text-gray-800 hover:border-2 hover:border-gray-800 transition"
+                >
+                  Subscribe to monthly newsletter
+                </button>
+              </form>
             </div>
           </div>
 
