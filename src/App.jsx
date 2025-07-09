@@ -1,4 +1,4 @@
-import icon from './img/icon-list.svg'
+import icon from '/img/icon-list.svg'
 import illustration from './img/illustration-sign-up-desktop.svg'
 import { useState } from "react";
 
