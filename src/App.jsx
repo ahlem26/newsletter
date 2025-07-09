@@ -21,7 +21,7 @@ function App() {
             <ul className="space-y-2">
               {/* Élément 1 */}
               <li className="flex items-start gap-2">
-                <img src="public/img/icon-list.svg" alt="check" />
+                <img src="public/icon-list.svg" alt="check" />
                 <span>Product discovery and building what matters</span>
               </li>
               {/* Élément 2 */}
