@@ -1,4 +1,25 @@
+import icon from './img/icon-list.svg'
+import illustration from './img/illustration-sign-up-desktop.svg'
+import { useState } from "react";
+
 function App() {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+
+  const isValidEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!isValidEmail(email)) {
+      setError("valid email required");
+    } else {
+      setError("");
+      console.log("Subscribed",email);
+    }
+  }
+
   return (
     <>
        {/* Conteneur principal en pleine hauteur de l'écran avec fond bleu */}
@@ -21,17 +42,17 @@ function App() {
             <ul className="space-y-2">
               {/* Élément 1 */}
               <li className="flex items-start gap-2">
-                <img src="public/icon-list.svg" alt="check" />
+                <img src={icon} alt="check" />
                 <span>Product discovery and building what matters</span>
               </li>
               {/* Élément 2 */}
               <li className="flex items-start gap-2">
-                <img src="src/img/icon-list.svg" alt="check" />
+                <img src={icon} alt="check" />
                 <span>Measuring to ensure updates are a success</span>
               </li>
               {/* Élément 3 */}
               <li className="flex items-start gap-2">
-                <img src="src/img/icon-list.svg" alt="check" />
+                <img src={icon} alt="check" />
                 <span>And much more!</span>
               </li>
             </ul>
@@ -54,7 +75,7 @@ function App() {
           {/* Partie droite : illustration affichée uniquement à partir de l’écran md (tablette et plus) */}
           <div className="flex-1 hidden md:block">
             <img
-              src="src/img/illustration-sign-up-desktop.svg"
+              src={illustration}
               alt="illustration"
               className="w-full h-auto"
             />
